@@ -1,0 +1,20 @@
+<monster>
+	<difficulty>1</difficulty>
+	<name>Snail</name>
+	<hp>5</hp>
+	<atk>2</atk>
+	<def>0</def>
+	<gold>5</gold>
+	<image>monster_snail.png</image>
+	<rhythm>NDNA</rhythm>
+</monster>
+<monster>
+	<difficulty>2</difficulty>
+	<name>Demon</name>
+	<hp>10</hp>
+	<atk>3</atk>
+	<def>1</def>
+	<gold>14</gold>
+	<image>monster_demon.png</image>
+	<rhythm>NA</rhythm>
+</monster>
