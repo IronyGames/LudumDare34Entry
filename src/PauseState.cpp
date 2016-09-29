@@ -27,7 +27,7 @@ void PauseState::update()
 	model->metronome->update();
 	if (model->metronome->hasBeatJustChanged()){
 		model->player->getInventory()->selectNext();
-		if (model->input->wasLeftReleased()){
+		if (model->input->isOnlyLeftPressed()){
 			model->player->use();
 		}
 	}

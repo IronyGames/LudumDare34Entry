@@ -10,6 +10,6 @@ public:
 	void draw();
 	void drawInInventory();
 	void drawInShop();
-private:
+protected:
 	int healPoints;
 };

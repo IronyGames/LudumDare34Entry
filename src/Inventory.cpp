@@ -24,6 +24,9 @@ bool Inventory::addItem(Item* newItem)
 
 Item* Inventory::useItem()
 {
+	if (items.size() == 0){
+		return new Item();
+	}
 	Item* out = items.at(getSelected());
 	items.erase(items.begin() + getSelected());
 	selected--;

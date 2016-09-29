@@ -152,9 +152,9 @@ void IdleState::drawHeroStats()
 	
 	String out = "HP ";
 	out += std::to_string(ms->currentHP);
-	out += "/AT+";
+	out += "/()+";
 	out += std::to_string(ms->atk);
-	out += " DE+";
+	out += " []+";
 	out += std::to_string(ms->def);
 	model->fonts->draw(statsOffset, out, "font1", false);
 	

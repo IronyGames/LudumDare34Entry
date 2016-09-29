@@ -7,6 +7,7 @@ class SpriteFontManager;
 
 class Item{
 public:
+	Item();
 	Item(String _name, Animation2D *_icon, unsigned int _price, SpriteFontManager *font);
 	virtual void drawInInventory();
 	virtual void drawInShop();

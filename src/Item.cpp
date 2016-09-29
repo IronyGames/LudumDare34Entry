@@ -11,6 +11,11 @@ Item::Item(String _name, Animation2D *_icon, unsigned int _price, SpriteFontMana
 
 }
 
+Item::Item()
+{
+
+}
+
 void Item::drawInInventory()
 {
 	icon->draw(true);
