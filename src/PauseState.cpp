@@ -1,14 +1,20 @@
 #include "PauseState.h"
 #include "Model.h"
 #include "Animation2D.h"
+#include "IdleState.h"
 #include "GameState.h"
 #include "GameStateManager.h"
 #include "cinder\gl\gl.h"
 #include "Global.h"
 #include "Keyboard.h"
+#include "Model.h"
+#include "Metronome.h"
+#include "Inventory.h"
+#include "Hero.h"
+#include "Offset2D.h"
 
 PauseState::PauseState(Model *m)
-:GameState(m)
+:IdleState(m)
 {
 	pause = new Animation2D("./../assets/pause.png");
 	pause->setTranslation(Coords2Ddouble(Global::windowSize.x / 2 - (pause->getWidth() * 10,
@@ -18,9 +24,14 @@ PauseState::PauseState(Model *m)
 
 void PauseState::update()
 {
-	if (model->input->isRightPressed()){
+	model->metronome->update();
+	if (model->metronome->hasBeatJustChanged()){
+		model->player->getInventory()->selectNext();
+		if (model->input->isOnlyLeftPressed()){
+			model->player->use();
+		}
 	}
-	else if (model->input->wasRightReleased()){
+	else if (model->input->isOnlyRightPressed()){
 		model->states->unPause();
 	}
 }
@@ -31,5 +42,16 @@ void PauseState::draw()
 
 	cinder::gl::pushMatrices();
 	pause->draw();
+	drawHeroInventory();
+	cinder::gl::popMatrices();
+}
+
+void PauseState::drawHeroInventory()
+{
+	cinder::gl::pushMatrices();
+	cinder::gl::translate(statsOffset->getTranslation());
+	cinder::gl::translate(Global::windowSize.x / 100.0, Global::windowSize.y / 5.0);
+	cinder::gl::scale(statsOffset->getScale());
+	model->player->getInventory()->drawInventoryInSelection();
 	cinder::gl::popMatrices();
 }

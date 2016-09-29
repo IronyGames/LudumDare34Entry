@@ -12,8 +12,9 @@ RendererManager::~RendererManager()
 	renderers.clear();
 }
 
-void RendererManager::getAvilableRenderer()
+Renderer* RendererManager::getAvailableRenderer()
 {
-
+	//Only one at the moment
+	return renderers.at(0);
 }
 

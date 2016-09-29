@@ -7,6 +7,9 @@ class PotionOfHealth : public Item{
 public:
 	PotionOfHealth(Model *m);
 	void use(Monster *m);
-private:
+	void draw();
+	void drawInInventory();
+	void drawInShop();
+protected:
 	int healPoints;
 };

@@ -10,5 +10,5 @@ private:
 public:
 	RendererManager(Model *_m);
 	~RendererManager();
-	void getAvilableRenderer();
+	Renderer* getAvailableRenderer();
 };

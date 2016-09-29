@@ -24,7 +24,6 @@ public:
 private:
 	KeyboardData *kMap;
 
-
 	enum KeyState{
 		LEFT = 0,
 		RIGHT,
