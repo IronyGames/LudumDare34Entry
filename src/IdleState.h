@@ -23,6 +23,7 @@ protected:
 
 	virtual void blink();
 	virtual void drawHeroStats();
+	virtual void drawHeroInventory();
 	virtual void prepareIncomingTransition();
 	Offset2D *statsOffset;
 private:

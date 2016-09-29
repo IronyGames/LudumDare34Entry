@@ -1,18 +1,29 @@
 #include "Item.h"
 #include "Monster.h"
+#include "SpriteFontManager.h"
+#include "Offset2D.h"
 
-Item::Item(String _name, Animation2D *_icon, unsigned int _price) : name(_name)
+Item::Item(String _name, Animation2D *_icon, unsigned int _price, SpriteFontManager *font) : name(_name)
 , icon(_icon)
 , price(_price)
+, font(font)
 {
 
 }
 
-void Item::draw()
+void Item::drawInInventory()
 {
-	//draw icon
-	//draw name
 	icon->draw(true);
+}
+
+void Item::drawInShop()
+{
+	icon->draw(true);
+
+	String out = "";
+	out += std::to_string(getPrice());
+	out += "GP ";
+	font->draw(new Offset2D(), out, "font1", false);
 }
 
 void Item::equip()

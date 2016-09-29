@@ -13,12 +13,15 @@ public:
 	void defend();
 	unsigned int attack();
 	void use();
-	void obtain(Item *i);
+	bool obtain(Item *i);
+	bool buy(Item *i);
 	void draw();
 	void update();
 	unsigned int receiveDamage(int _dmg, bool wasDefending = false);
 	void addMoney(int pieces);
 	void reset();
+	Inventory* getInventory();
+	
 private:
 	Hero(int _maxHP, int _currentHP, int _atk, int _def, int _gold);
 	void setSpriteSheet();

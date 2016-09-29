@@ -1,3 +1,4 @@
+#include <math.h>
 #include "IdleState.h"
 #include "cinder/gl/gl.h"
 #include "Model.h"
@@ -14,6 +15,7 @@
 #include "Offset2D.h"
 #include "Hero.h"
 #include "MobStats.h"
+#include "Inventory.h"
 
 IdleState::IdleState(Model *m)
 :GameState(m)
@@ -123,7 +125,6 @@ void IdleState::draw()
 	drawHeroStats();
 }
 
-#include <math.h>
 void IdleState::evaluateBeat()
 {
 	int r = rand() % 100;
@@ -148,20 +149,30 @@ void IdleState::blink()
 void IdleState::drawHeroStats()
 {
 	MobStats *ms = model->player->getStats();
-
+	
 	String out = "HP ";
 	out += std::to_string(ms->currentHP);
-	out += "/AT ";
+	out += "/AT+";
 	out += std::to_string(ms->atk);
-	out += " DE ";
+	out += " DE+";
 	out += std::to_string(ms->def);
-	out += "/WE()";
-	out += " SH[]";
-	out += "/PO{}";
 	model->fonts->draw(statsOffset, out, "font1", false);
+	
+	drawHeroInventory();
+
 }
 
 void IdleState::prepareIncomingTransition()
 {
 	blink();
+}
+
+void IdleState::drawHeroInventory()
+{
+	cinder::gl::pushMatrices();
+	cinder::gl::translate(statsOffset->getTranslation());
+	cinder::gl::translate(Global::windowSize.x / 100.0, Global::windowSize.y / 5.0);
+	cinder::gl::scale(statsOffset->getScale());
+	model->player->getInventory()->drawInventory();
+	cinder::gl::popMatrices();
 }
