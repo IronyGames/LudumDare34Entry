@@ -9,5 +9,10 @@ Renderer::Renderer(Model *_m)
 
 void Renderer::renderAnimation2D(Animation2D *animation)
 {
+	
+}
+
+void Renderer::renderHero(Hero *hero)
+{
 
 }

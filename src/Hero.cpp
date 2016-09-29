@@ -7,16 +7,17 @@
 #include "Model.h"
 #include "ImageStorage.h"
 #include "Offset2D.h"
+#include "Item.h"
 
 Hero::Hero(int _maxHP, int _currentHP, int _atk, int _def, int _gold)
 :Monster("Hero", _maxHP, _currentHP, _atk, _def, _gold, "")
-,inventory(new Inventory())
 {
 }
 
 Hero::Hero(Model *m)
-:Hero(10, 10, 2, 1, 0)
+:Hero(10, 10, 2, 1, 15)
 {
+	inventory = new Inventory(new Animation2D(m->images->get("icons.png"), new Offset2D(), 8, 16, 1, false, 14), 3);
 
 	Image *i = m->images->get("hero2.png");
 	Spritesheet s = Spritesheet();
@@ -51,13 +52,14 @@ unsigned int Hero::attack()
 
 void Hero::use()
 {
-
+	Item *ui = inventory->useItem();
+	ui->use(this);
+	delete ui;
 }
 
 void Hero::draw()
 {
 	sprites.draw(true);
-	inventory->drawInventory();
 }
 
 void Hero::update()
@@ -96,7 +98,23 @@ void Hero::reset()
 	//TODO give standard items & equip again
 }
 
-void Hero::obtain(Item *i)
+bool Hero::obtain(Item *i)
 {
-	inventory->addItem(i);
+	return inventory->addItem(i);
+}
+
+bool Hero::buy(Item *i)
+{
+	int price = i->getPrice();
+	if (price > getStats()->gold){
+		return false;
+	}
+	getStats()->gold -= price;
+
+	return obtain(i);
+}
+
+Inventory* Hero::getInventory()
+{
+	return inventory;
 }

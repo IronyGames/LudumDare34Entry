@@ -13,6 +13,7 @@ public:
 	void draw();
 	void prepareIncomingTransition();
 private:
+	ciVoicePointer beat;
 	Inventory *stock;
 	void prepareStock();
 	std::vector<Item*> items;
